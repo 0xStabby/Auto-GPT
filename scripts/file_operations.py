@@ -68,6 +68,9 @@ def search_files(directory):
         search_directory = safe_join(working_directory, directory)
 
     for root, _, files in os.walk(search_directory):
+        if 'node_modules' in dirs:
+            dirs.remove('node_modules')
+            continue
         for file in files:
             if file.startswith('.'):
                 continue

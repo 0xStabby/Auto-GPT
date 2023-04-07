@@ -370,16 +370,20 @@ while True:
                     f"\nResult: {result} " \
                     f"\nHuman Feedback: {user_input} "
 
-    memory.add(memory_to_add)
+    try:
+        memory.add(memory_to_add)
 
-    # Check if there's a result from the command append it to the message
-    # history
-    if result is not None:
-        full_message_history.append(chat.create_chat_message("system", result))
-        print_to_console("SYSTEM: ", Fore.YELLOW, result)
-    else:
-        full_message_history.append(
-            chat.create_chat_message(
-                "system", "Unable to execute command"))
-        print_to_console("SYSTEM: ", Fore.YELLOW, "Unable to execute command")
-
+        # Check if there's a result from the command append it to the message
+        # history
+        if result is not None:
+            full_message_history.append(chat.create_chat_message("system", result))
+            print_to_console("SYSTEM: ", Fore.YELLOW, result)
+        else:
+            full_message_history.append(
+                chat.create_chat_message(
+                    "system", "Unable to execute command"))
+            print_to_console("SYSTEM: ", Fore.YELLOW, "Unable to execute command")
+        pass
+    except Exception as e:
+        print_to_console("SYSTEM: ", Fore.YELLOW, "Unable to execute command likely too long")
+        # raise e

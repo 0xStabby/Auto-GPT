@@ -8,6 +8,7 @@ from config import Config
 import ai_functions as ai
 from file_operations import read_file, write_to_file, append_to_file, delete_file, search_files
 from execute_code import execute_python_file
+from execute_cli_command import execute_cli_command
 from json_parser import fix_and_parse_json
 from duckduckgo_search import ddg
 from googleapiclient.discovery import build
@@ -102,6 +103,8 @@ def execute_command(command_name, arguments):
             return ai.write_tests(arguments["code"], arguments.get("focus"))
         elif command_name == "execute_python_file":  # Add this command
             return execute_python_file(arguments["file"])
+        elif command_name == "execute_cli_command":  # Add this command
+            return execute_cli_command(arguments["command"])
         elif command_name == "task_complete":
             shutdown()
         else:
